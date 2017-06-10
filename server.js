@@ -2,7 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
 var mongoose = require('mongoose');
-var path = require("path");
 var methodOverride = require('method-override')
 
 var app = express();
