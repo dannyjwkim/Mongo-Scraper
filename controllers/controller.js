@@ -5,8 +5,8 @@ var cheerio = require('cheerio');
 var methodOverride = require('method-override')
 
 // Import models
-var Article = require('../models/article.js');
-var Note = require('../models/note.js');
+var Article = require('../models/Article.js');
+var Note = require('../models/Note.js');
 
 router.get('/', function(req, res) {
   res.render('index');

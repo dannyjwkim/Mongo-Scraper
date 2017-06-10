@@ -22,9 +22,6 @@ app.use(bodyParser.urlencoded({
 // Access the public folder files statically
 app.use(express.static('public'));
 
-// Override with POST having ?_method=PUT
-app.use(methodOverride('_method'))
-
 // Local database configuration with mongoose
 // mongoose.connect('mongodb://localhost/mongoscraper');
 // Need heroku deploy link
