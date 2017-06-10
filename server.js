@@ -22,10 +22,20 @@ app.use(bodyParser.urlencoded({
 // Access the public folder files statically
 app.use(express.static('public'));
 
+// Override with POST having ?_method=PUT
+app.use(methodOverride('_method'))
+
 // Local database configuration with mongoose
 // mongoose.connect('mongodb://localhost/mongoscraper');
 // Need heroku deploy link
-mongoose.connect("mongodb://heroku_nt968r3s:mur556oo9gl65muv4douegiilc@ds023912.mlab.com:23912/heroku_nt968r3s");
+// mongoose.connect("mongodb://heroku_nt968r3s:mur556oo9gl65muv4douegiilc@ds023912.mlab.com:23912/heroku_nt968r3s");
+
+if(process.env.MONGODB_URI){
+    mongoose.connect(process.env.MONGODB_URI);
+} else{
+    mongoose.connect("mongodb://localhost/mongoscraper");
+}
+
 var db = mongoose.connection;
 
 // Show any mongoose errors
