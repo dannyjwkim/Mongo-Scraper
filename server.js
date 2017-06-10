@@ -1,27 +1,48 @@
-
-// dependencies
 var express = require('express');
-var routes = require('./controllers/controller.js');
-var app = express();
 var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
+var mongoose = require('mongoose');
+var path = require("path");
+var methodOverride = require('method-override')
+
+var app = express();
+var PORT = process.env.PORT || 8080;
+
+var routes = require('./controllers/controller.js');
+
 
 // Handlebars
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-//use body-parser
+// Use body-parser
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-// make public a static dir
+// Access the public folder files statically
 app.use(express.static('public'));
 
-//use home route
+// Database configuration with mongoose
+mongoose.connect('mongodb://localhost/mongoscraper');
+// Need heroku deploy link
+mongoose.connect('mongodb://localhost/heroku_1234');
+var db = mongoose.connection;
+
+// Show any mongoose errors
+db.on('error', function(err) {
+  console.log('Mongoose Error: ', err);
+});
+
+// Once logged in to the db through mongoose, log a success message
+db.once('open', function() {
+  console.log('Mongoose connection successful.');
+});
+
+// Use home route
 app.use('/', routes);
 
-// listen on port 8080
-app.listen(process.env.PORT || 8080,function(){
-  process.env.PORT == undefined? console.log("Try port 8080"):console.log("App listening on PORT" + process.env.PORT);
+// Listen on port 8080
+app.listen(PORT,function(){
+  console.log("App listening on PORT: " + PORT);
 });
