@@ -24,9 +24,9 @@ app.use(bodyParser.urlencoded({
 app.use(express.static('public'));
 
 // Database configuration with mongoose
-mongoose.connect('mongodb://localhost/mongoscraper');
+// mongoose.connect('mongodb://localhost/mongoscraper');
 // Need heroku deploy link
-mongoose.connect('mongodb://localhost/heroku_1234');
+mongoose.connect('mongodb://heroku_x3qb2xqr:9g9fjl4r9m2gpea5uujnfseg2u@ds023912.mlab.com:23912/heroku_x3qb2xqr');
 var db = mongoose.connection;
 
 // Show any mongoose errors
